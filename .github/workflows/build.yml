@@ -1,0 +1,25 @@
+name: Build on macOS
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-13, macos-latest]   # Intel and Apple Silicon
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check installer syntax
+        run: bash -n install.sh
+      - name: Extract Swift source from installer
+        run: sed -n "/<<'EOF_SWIFT'/,/^EOF_SWIFT$/p" install.sh | sed '1d;$d' > SoftBar.swift
+      - name: Compile
+        run: |
+          swiftc --version
+          swiftc -O SoftBar.swift -o SoftBar -framework Cocoa -framework Carbon
+          file SoftBar
