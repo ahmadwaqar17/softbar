@@ -31,10 +31,19 @@ jobs:
           ls -la ~/Applications/SoftBar.app/Contents/MacOS/
           codesign -dv ~/Applications/SoftBar.app 2>&1 | head -3
           pgrep -lx SoftBar
-      - name: Screenshot
+      - name: Screenshot right after install
+        run: screencapture -x screenshot.png || true
+      - name: Grant Accessibility on the CI machine only, close Settings
         run: |
-          screencapture -x screenshot.png || true
+          osascript -e 'quit app "System Settings"' || true
+          BIN="$HOME/Applications/SoftBar.app"
+          for DB in "$HOME/Library/Application Support/com.apple.TCC/TCC.db" "/Library/Application Support/com.apple.TCC/TCC.db"; do
+            sudo sqlite3 "$DB" "INSERT OR REPLACE INTO access (service,client,client_type,auth_value,auth_reason,auth_version,indirect_object_identifier,flags) VALUES ('kTCCServiceAccessibility','com.softbar.app',0,2,4,1,'UNUSED',0);" || true
+          done
+          pkill -x SoftBar || true; sleep 1; open "$BIN"; sleep 6
+      - name: Screenshot with permission
+        run: screencapture -x screenshot-granted.png || true
       - uses: actions/upload-artifact@v4
         with:
           name: screenshot
-          path: screenshot.png
+          path: screenshot*.png
