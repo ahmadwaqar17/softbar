@@ -30,6 +30,10 @@ If Apple's Command Line Tools aren't installed yet, a window pops up first. Clic
 
 ## Use
 
+![How to use SoftBar](docs/usage.svg)
+
+<sub>Illustration of SoftBar in use.</sub>
+
 - Click the buttons. Volume, brightness and keyboard light repeat while held.
 - Hold the **fn** key to show F1–F12, or click **fn** on the bar.
 - **Ctrl+Option+T** shows or hides the bar. Drag it anywhere.
