@@ -25,7 +25,7 @@ curl -fsSL https://raw.githubusercontent.com/ahmadwaqar17/softbar/main/install.s
 
 Or, if you were sent the file: `bash ~/Downloads/install.sh`
 
-Then turn on **SoftBar** in System Settings → Privacy & Security → **Accessibility**.
+When it finishes, the **Accessibility** settings page opens by itself. Turn on the switch next to **SoftBar** and the bar starts working right away. macOS requires this one click for any app that presses keys, and no app is allowed to do it for you.
 If Apple's Command Line Tools aren't installed yet, a window pops up first. Click **Install** and the script continues by itself.
 
 ## Use

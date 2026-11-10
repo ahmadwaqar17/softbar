@@ -339,14 +339,16 @@ EOF_AGENT
 launchctl bootout "gui/$(id -u)" "$AGENT" 2>/dev/null || true
 launchctl bootstrap "gui/$(id -u)" "$AGENT" 2>/dev/null || launchctl load -w "$AGENT" 2>/dev/null || true
 
-# 5. Launch.
+# 5. Launch, then open the exact permission page so the user only flips one switch.
 open "$APP"
+sleep 2
+open "x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility" 2>/dev/null || true
 say "Done! SoftBar is running at the bottom of the screen."
 cat <<'EOF_MSG'
 
-  ONE LAST STEP: macOS will ask for "Accessibility" permission.
-    System Settings -> Privacy & Security -> Accessibility -> turn ON "SoftBar".
-    (The bar looks faded until this is done.)
+  LAST STEP (macOS requires you to do this yourself):
+    The Accessibility settings page just opened.
+    Turn ON the switch next to "SoftBar". That's it - the bar starts working instantly.
 
   Tips:
     - Hold the fn key to show F1-F12, or click "fn" on the bar.
