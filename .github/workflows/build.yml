@@ -7,19 +7,34 @@ on:
 
 jobs:
   build:
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [macos-13, macos-latest]   # Intel and Apple Silicon
-    runs-on: ${{ matrix.os }}
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
       - name: Check installer syntax
         run: bash -n install.sh
       - name: Extract Swift source from installer
         run: sed -n "/<<'EOF_SWIFT'/,/^EOF_SWIFT$/p" install.sh | sed '1d;$d' > SoftBar.swift
-      - name: Compile
+      - name: Compile (Apple Silicon)
         run: |
           swiftc --version
-          swiftc -O SoftBar.swift -o SoftBar -framework Cocoa -framework Carbon
-          file SoftBar
+          swiftc -O SoftBar.swift -o SoftBar-arm64 -framework Cocoa -framework Carbon
+          file SoftBar-arm64
+      - name: Compile (Intel, macOS 10.15+ - e.g. 2019 MacBook Pro)
+        run: |
+          swiftc -O -target x86_64-apple-macos10.15 SoftBar.swift -o SoftBar-x86_64 -framework Cocoa -framework Carbon
+          file SoftBar-x86_64
+      - name: Run full installer
+        run: bash install.sh
+      - name: Check app installed and running
+        run: |
+          sleep 5
+          ls -la ~/Applications/SoftBar.app/Contents/MacOS/
+          codesign -dv ~/Applications/SoftBar.app 2>&1 | head -3
+          pgrep -lx SoftBar
+      - name: Screenshot
+        run: |
+          screencapture -x screenshot.png || true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: screenshot
+          path: screenshot.png
