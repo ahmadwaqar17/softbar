@@ -3,6 +3,16 @@
 An on-screen replacement for a broken MacBook Pro Touch Bar.
 A small floating bar with **Esc, F1–F12, brightness, keyboard light, media, volume, screenshot and lock**.
 
+**Controls** (default)
+
+![SoftBar controls row](docs/controls.svg)
+
+**Function keys** (hold `fn`, or click **fn**)
+
+![SoftBar function keys row](docs/function-keys.svg)
+
+<sub>Preview illustrations. On macOS 11 and newer the buttons use Apple's built-in SF Symbols icons.</sub>
+
 Works on Intel and Apple Silicon Macs running macOS 10.15 Catalina or newer. No admin password needed.
 
 ## Install
