@@ -3,15 +3,9 @@
 An on-screen replacement for a broken MacBook Pro Touch Bar.
 A small floating bar with **Esc, F1–F12, brightness, keyboard light, media, volume, screenshot and lock**.
 
-**Controls** (default)
+![SoftBar on a real Mac](docs/screenshot-bar.png)
 
-![SoftBar controls row](docs/controls.svg)
-
-**Function keys** (hold `fn`, or click **fn**)
-
-![SoftBar function keys row](docs/function-keys.svg)
-
-<sub>Preview illustrations. On macOS 11 and newer the buttons use Apple's built-in SF Symbols icons.</sub>
+Hold `fn` (or click **fn**) to switch the bar to **Esc + F1–F12**.
 
 Works on Intel and Apple Silicon Macs running macOS 10.15 Catalina or newer. No admin password needed.
 
@@ -26,6 +20,11 @@ curl -fsSL https://raw.githubusercontent.com/ahmadwaqar17/softbar/main/install.s
 Or, if you were sent the file: `bash ~/Downloads/install.sh`
 
 When it finishes, the **Accessibility** settings page opens by itself. Turn on the switch next to **SoftBar** and the bar starts working right away. macOS requires this one click for any app that presses keys, and no app is allowed to do it for you.
+
+![Real screenshot right after installing](docs/screenshot-mac.png)
+
+<sub>Real screenshot from a Mac right after running the install command. Click **Open System Settings** and turn on SoftBar.</sub>
+
 If Apple's Command Line Tools aren't installed yet, a window pops up first. Click **Install** and the script continues by itself.
 
 ## Use
